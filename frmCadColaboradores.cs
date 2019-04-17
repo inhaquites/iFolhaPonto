@@ -44,6 +44,7 @@ namespace iFolhaPonto
             txtColaborador.Enabled = true;
             txtCPF.Enabled = true;
             txtDepto.Enabled = true;
+            txtFuncao.Enabled = true;
             txtCentroCusto.Enabled = true;
         }
 
@@ -53,6 +54,7 @@ namespace iFolhaPonto
             txtColaborador.Enabled = false;
             txtCPF.Enabled = false;
             txtDepto.Enabled = false;
+            txtFuncao.Enabled = false;
             txtCentroCusto.Enabled = false;
         }
 
@@ -63,6 +65,7 @@ namespace iFolhaPonto
             txtColaborador.Text = "";
             txtCPF.Text = "";
             txtDepto.Text = "";
+            txtFuncao.Text = "";
             txtCentroCusto.Text = "";
         }
 
@@ -75,7 +78,6 @@ namespace iFolhaPonto
                     MessageBox.Show("Informe o COD.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
-
                 if (txtColaborador.Text == "")
                 {
                     MessageBox.Show("Informe o Colaborador.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -96,6 +98,12 @@ namespace iFolhaPonto
                     MessageBox.Show("Informe o Centro Custo.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
+                if (txtFuncao.Text == "")
+                {
+                    MessageBox.Show("Informe a Função.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
+                
             }
 
             return true;
@@ -106,9 +114,10 @@ namespace iFolhaPonto
             txtID.Text = dtgColaboradores.CurrentRow.Cells[0].Value.ToString();
             txtCod.Text = dtgColaboradores.CurrentRow.Cells[1].Value.ToString().Trim();
             txtColaborador.Text = dtgColaboradores.CurrentRow.Cells[2].Value.ToString();
-            txtCentroCusto.Text = dtgColaboradores.CurrentRow.Cells[3].Value.ToString();
-            txtDepto.Text = dtgColaboradores.CurrentRow.Cells[4].Value.ToString();
-            txtCPF.Text = dtgColaboradores.CurrentRow.Cells[5].Value.ToString();
+            txtDepto.Text = dtgColaboradores.CurrentRow.Cells[3].Value.ToString();
+            txtFuncao.Text = dtgColaboradores.CurrentRow.Cells[4].Value.ToString();
+            txtCentroCusto.Text = dtgColaboradores.CurrentRow.Cells[5].Value.ToString();
+            txtCPF.Text = dtgColaboradores.CurrentRow.Cells[6].Value.ToString();
 
             btnSalvar.Enabled = true;
             btnCancelarEdicao.Enabled = true;
@@ -160,8 +169,9 @@ namespace iFolhaPonto
                         colaboradores.ID = Convert.ToInt32(txtID.Text);
                     colaboradores.Cod = txtCod.Text;
                     colaboradores.Colaborador = txtColaborador.Text;
-                    colaboradores.CentroCusto = txtCentroCusto.Text;
                     colaboradores.Depto = txtDepto.Text;
+                    colaboradores.Funcao = txtFuncao.Text;
+                    colaboradores.CentroCusto = txtCentroCusto.Text;
                     colaboradores.CPF = txtCPF.Text;
 
 

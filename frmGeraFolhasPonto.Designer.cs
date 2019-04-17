@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkMarcaTodos = new System.Windows.Forms.CheckBox();
             this.dtgResultadoPesquisa = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,7 +41,6 @@
             this.btnPesquisar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnGerar = new System.Windows.Forms.ToolStripButton();
-            this.chkMarcaTodos = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgResultadoPesquisa)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -61,6 +61,17 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
+            // chkMarcaTodos
+            // 
+            this.chkMarcaTodos.AutoSize = true;
+            this.chkMarcaTodos.Location = new System.Drawing.Point(9, 86);
+            this.chkMarcaTodos.Name = "chkMarcaTodos";
+            this.chkMarcaTodos.Size = new System.Drawing.Size(118, 21);
+            this.chkMarcaTodos.TabIndex = 24;
+            this.chkMarcaTodos.Text = "Marcar Todos";
+            this.chkMarcaTodos.UseVisualStyleBackColor = true;
+            this.chkMarcaTodos.CheckedChanged += new System.EventHandler(this.chkMarcaTodos_CheckedChanged);
+            // 
             // dtgResultadoPesquisa
             // 
             this.dtgResultadoPesquisa.AllowUserToAddRows = false;
@@ -78,6 +89,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.txtAnoCompetencia);
             this.groupBox2.Controls.Add(this.cmbMesCompetencia);
@@ -100,6 +113,7 @@
             // 
             // txtAnoCompetencia
             // 
+            this.txtAnoCompetencia.BackColor = System.Drawing.SystemColors.Window;
             this.txtAnoCompetencia.Location = new System.Drawing.Point(753, 19);
             this.txtAnoCompetencia.Name = "txtAnoCompetencia";
             this.txtAnoCompetencia.Size = new System.Drawing.Size(52, 22);
@@ -107,6 +121,7 @@
             // 
             // cmbMesCompetencia
             // 
+            this.cmbMesCompetencia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMesCompetencia.FormattingEnabled = true;
             this.cmbMesCompetencia.Location = new System.Drawing.Point(626, 17);
             this.cmbMesCompetencia.Name = "cmbMesCompetencia";
@@ -115,6 +130,7 @@
             // 
             // cmbCentroCusto
             // 
+            this.cmbCentroCusto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCentroCusto.FormattingEnabled = true;
             this.cmbCentroCusto.Location = new System.Drawing.Point(100, 17);
             this.cmbCentroCusto.Name = "cmbCentroCusto";
@@ -170,17 +186,6 @@
             this.btnGerar.Size = new System.Drawing.Size(36, 36);
             this.btnGerar.Text = "Gerar Planilhas";
             this.btnGerar.Click += new System.EventHandler(this.btnGerar_Click);
-            // 
-            // chkMarcaTodos
-            // 
-            this.chkMarcaTodos.AutoSize = true;
-            this.chkMarcaTodos.Location = new System.Drawing.Point(9, 86);
-            this.chkMarcaTodos.Name = "chkMarcaTodos";
-            this.chkMarcaTodos.Size = new System.Drawing.Size(118, 21);
-            this.chkMarcaTodos.TabIndex = 24;
-            this.chkMarcaTodos.Text = "Marcar Todos";
-            this.chkMarcaTodos.UseVisualStyleBackColor = true;
-            this.chkMarcaTodos.CheckedChanged += new System.EventHandler(this.chkMarcaTodos_CheckedChanged);
             // 
             // frmGeraFolhasPonto
             // 

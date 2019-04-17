@@ -16,12 +16,14 @@ namespace iFolhaPonto.Models
         private string _centrocusto;
         private string _depto;
         private string _cPF;
+        private string _funcao;
 
         public int ID { get => _iD; set => _iD = value; }
         public string Cod { get => _cod; set => _cod = value; }
         public string Colaborador { get => _colaborador; set => _colaborador = value; }
         public string CentroCusto { get => _centrocusto; set => _centrocusto = value; }
         public string Depto { get => _depto; set => _depto = value; }
+        public string Funcao { get => _funcao; set => _funcao = value; }
         public string CPF { get => _cPF; set => _cPF = value; }
 
         public static DataTable GetColaboradores()
@@ -52,7 +54,7 @@ namespace iFolhaPonto.Models
             {
                 using (var cmd = DalHelper.DbConnection().CreateCommand())
                 {
-                    cmd.CommandText = "SELECT 0 AS [$OPCAO], COLABORADOR, CENTROCUSTO, DEPTO FROM Colaboradores where centrocusto ='" + pCentroCusto + "'";
+                    cmd.CommandText = "SELECT 0 AS [$OPCAO], COD, COLABORADOR, CENTROCUSTO, DEPTO, CPF, Funcao FROM Colaboradores where centrocusto ='" + pCentroCusto + "'";
                     da = new SQLiteDataAdapter(cmd.CommandText, DalHelper.DbConnection());
                     da.Fill(dt);
                     return dt;
@@ -130,12 +132,13 @@ namespace iFolhaPonto.Models
             {
                 using (var cmd = DalHelper.DbConnection().CreateCommand())
                 {
-                    cmd.CommandText = "INSERT INTO Colaboradores(Cod, Colaborador, CentroCusto, Depto, CPF ) values (@Cod, @Colaborador, @CentroCusto, @Depto, @CPF)";
+                    cmd.CommandText = "INSERT INTO Colaboradores(Cod, Colaborador, Funcao, CentroCusto, Depto, CPF ) values (@Cod, @Colaborador, @Funcao, @CentroCusto, @Depto, @CPF)";
                     cmd.Prepare();
                     cmd.Parameters.AddWithValue("@Cod", colaboradores.Cod);
                     cmd.Parameters.AddWithValue("@Colaborador", colaboradores.Colaborador);
                     cmd.Parameters.AddWithValue("@CentroCusto", colaboradores.CentroCusto);
                     cmd.Parameters.AddWithValue("@Depto", colaboradores.Depto);
+                    cmd.Parameters.AddWithValue("@Funcao", colaboradores.Funcao);
                     cmd.Parameters.AddWithValue("@CPF", colaboradores.CPF);
                     result = cmd.ExecuteNonQuery();
                 }
@@ -154,12 +157,13 @@ namespace iFolhaPonto.Models
                 {
                     if (colaboradores.ID != null)
                     {
-                        cmd.CommandText = "UPDATE Colaboradores SET Cod=@Cod, Colaborador=@Colaborador, CentroCusto=@CentroCusto, , Depto=@Depto, CPF=@CPF  WHERE Id=@Id";
+                        cmd.CommandText = "UPDATE Colaboradores SET Cod=@Cod, Colaborador=@Colaborador, CentroCusto=@CentroCusto, Funcao@Funcao, Depto=@Depto, CPF=@CPF  WHERE Id=@Id";
                         //cmd.Parameters.AddWithValue("@Id", feriados.ID);
                         cmd.Parameters.AddWithValue("@Cod", colaboradores.Cod);
                         cmd.Parameters.AddWithValue("@Colaborador", colaboradores.Colaborador);
                         cmd.Parameters.AddWithValue("@CentroCusto", colaboradores.CentroCusto);
                         cmd.Parameters.AddWithValue("@Depto", colaboradores.Depto);
+                        cmd.Parameters.AddWithValue("@Funcao", colaboradores.Funcao);
                         cmd.Parameters.AddWithValue("@CPF", colaboradores.CPF);
                         cmd.ExecuteNonQuery();
                     }

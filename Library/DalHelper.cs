@@ -69,8 +69,9 @@ namespace iFolhaPonto
                     cmd.CommandText = "CREATE TABLE IF NOT EXISTS [Colaboradores] ([id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE," +
                         "[Cod] Varchar(10) NOT NULL," +
                         "[Colaborador] Varchar(100) NOT NULL," +
-                        "[CentroCusto] Varchar(120) NOT NULL," +
-                        "[Depto] Varchar(100) NOT NULL,"+
+                        "[Depto] Varchar(100) NOT NULL," +
+                        "[Funcao] Varchar(100) NOT NULL," +
+                        "[CentroCusto] Varchar(120) NOT NULL," +                        
                         "[CPF] Varchar(11) NOT NULL)";
                     cmd.ExecuteNonQuery();
                 }

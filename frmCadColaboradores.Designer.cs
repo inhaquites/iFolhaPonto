@@ -50,6 +50,8 @@
             this.btnExcluir = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnCancelarEdicao = new System.Windows.Forms.ToolStripButton();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtFuncao = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgColaboradores)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -65,7 +67,7 @@
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Location = new System.Drawing.Point(12, 42);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(934, 594);
+            this.groupBox1.Size = new System.Drawing.Size(1115, 594);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -82,7 +84,7 @@
             this.dtgColaboradores.ReadOnly = true;
             this.dtgColaboradores.RowTemplate.Height = 24;
             this.dtgColaboradores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgColaboradores.Size = new System.Drawing.Size(922, 459);
+            this.dtgColaboradores.Size = new System.Drawing.Size(1103, 459);
             this.dtgColaboradores.TabIndex = 1;
             this.dtgColaboradores.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgColaboradores_CellDoubleClick);
             // 
@@ -90,6 +92,8 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.txtFuncao);
+            this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.txtID);
             this.groupBox2.Controls.Add(this.txtDepto);
             this.groupBox2.Controls.Add(this.txtCentroCusto);
@@ -103,7 +107,7 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(6, 10);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(922, 113);
+            this.groupBox2.Size = new System.Drawing.Size(1103, 113);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
@@ -118,22 +122,22 @@
             // 
             // txtDepto
             // 
-            this.txtDepto.Location = new System.Drawing.Point(641, 54);
+            this.txtDepto.Location = new System.Drawing.Point(861, 54);
             this.txtDepto.Name = "txtDepto";
-            this.txtDepto.Size = new System.Drawing.Size(275, 22);
+            this.txtDepto.Size = new System.Drawing.Size(236, 22);
             this.txtDepto.TabIndex = 9;
             // 
             // txtCentroCusto
             // 
             this.txtCentroCusto.Location = new System.Drawing.Point(284, 54);
             this.txtCentroCusto.Name = "txtCentroCusto";
-            this.txtCentroCusto.Size = new System.Drawing.Size(290, 22);
+            this.txtCentroCusto.Size = new System.Drawing.Size(229, 22);
             this.txtCentroCusto.TabIndex = 8;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(591, 59);
+            this.label5.Location = new System.Drawing.Point(809, 59);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(46, 17);
             this.label5.TabIndex = 7;
@@ -170,7 +174,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtColaborador.Location = new System.Drawing.Point(284, 17);
             this.txtColaborador.Name = "txtColaborador";
-            this.txtColaborador.Size = new System.Drawing.Size(632, 22);
+            this.txtColaborador.Size = new System.Drawing.Size(813, 22);
             this.txtColaborador.TabIndex = 3;
             // 
             // label2
@@ -211,7 +215,7 @@
             this.btnCancelarEdicao});
             this.tsMenu.Location = new System.Drawing.Point(0, 0);
             this.tsMenu.Name = "tsMenu";
-            this.tsMenu.Size = new System.Drawing.Size(958, 39);
+            this.tsMenu.Size = new System.Drawing.Size(1139, 39);
             this.tsMenu.TabIndex = 2;
             this.tsMenu.Text = "toolStrip1";
             // 
@@ -283,11 +287,27 @@
             this.btnCancelarEdicao.ToolTipText = "Cancelar";
             this.btnCancelarEdicao.Click += new System.EventHandler(this.btnCancelarEdicao_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(528, 58);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(55, 17);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Função";
+            // 
+            // txtFuncao
+            // 
+            this.txtFuncao.Location = new System.Drawing.Point(589, 54);
+            this.txtFuncao.Name = "txtFuncao";
+            this.txtFuncao.Size = new System.Drawing.Size(214, 22);
+            this.txtFuncao.TabIndex = 12;
+            // 
             // frmCadColaboradores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(958, 648);
+            this.ClientSize = new System.Drawing.Size(1139, 648);
             this.Controls.Add(this.tsMenu);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmCadColaboradores";
@@ -328,5 +348,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnCancelarEdicao;
         private System.Windows.Forms.DataGridView dtgColaboradores;
+        private System.Windows.Forms.TextBox txtFuncao;
+        private System.Windows.Forms.Label label6;
     }
 }

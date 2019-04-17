@@ -43,15 +43,16 @@ namespace iFolhaPonto
 
             for (int i = 0; i < dtgDadosExternos.Rows.Count; i++)
             {
-                if(!ColaboradorJaCadastrado(dtgDadosExternos.Rows[i].Cells[4].Value.ToString()))
+                if(!ColaboradorJaCadastrado(dtgDadosExternos.Rows[i].Cells[5].Value.ToString()))
                 {
                     Colaboradores colab = new Colaboradores
                     {
                         Cod = dtgDadosExternos.Rows[i].Cells[0].Value.ToString().Trim(),
                         Colaborador = dtgDadosExternos.Rows[i].Cells[1].Value.ToString().Trim(),
-                        CentroCusto = dtgDadosExternos.Rows[i].Cells[2].Value.ToString().Trim(),
-                        Depto = dtgDadosExternos.Rows[i].Cells[3].Value.ToString().Trim(),
-                        CPF = dtgDadosExternos.Rows[i].Cells[4].Value.ToString().Trim()
+                        Depto = dtgDadosExternos.Rows[i].Cells[2].Value.ToString().Trim(),
+                        Funcao = dtgDadosExternos.Rows[i].Cells[3].Value.ToString().Trim(),
+                        CentroCusto = dtgDadosExternos.Rows[i].Cells[4].Value.ToString().Trim(),                        
+                        CPF = dtgDadosExternos.Rows[i].Cells[5].Value.ToString().Trim()
                     };
                     Colaboradores.Add(colab);
                 }
