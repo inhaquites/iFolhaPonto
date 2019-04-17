@@ -15,6 +15,7 @@ namespace iFolhaPonto
         public frmSobre()
         {
             InitializeComponent();
+
         }
     }
 }
