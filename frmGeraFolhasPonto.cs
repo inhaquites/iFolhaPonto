@@ -126,12 +126,7 @@ namespace iFolhaPonto
             // Get combobox selection (in handler)
             string value = ((KeyValuePair<string, string>)cmbCentroCusto.SelectedItem).Value;
         }
-
-        private void populaComboColaboradoresPorCentroCusto(string pCentroCusto)
-        {
-
-        }
-
+                
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
             if (VerificaCampos())
@@ -162,11 +157,7 @@ namespace iFolhaPonto
                     MessageBox.Show("Erro : " + ex.Message);
                 }
             }
-        }
-
-
-
-        
+        }        
 
         private Boolean VerificaCampos()
         {
