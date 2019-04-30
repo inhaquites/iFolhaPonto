@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblRegistros = new System.Windows.Forms.Label();
             this.chkMarcaTodos = new System.Windows.Forms.CheckBox();
             this.dtgResultadoPesquisa = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -41,6 +42,10 @@
             this.btnPesquisar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnGerar = new System.Windows.Forms.ToolStripButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.btnCaminho = new System.Windows.Forms.Button();
+            this.lblcaminho = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgResultadoPesquisa)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -52,6 +57,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.lblRegistros);
             this.groupBox1.Controls.Add(this.chkMarcaTodos);
             this.groupBox1.Controls.Add(this.dtgResultadoPesquisa);
             this.groupBox1.Controls.Add(this.groupBox2);
@@ -61,10 +67,20 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
+            // lblRegistros
+            // 
+            this.lblRegistros.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblRegistros.AutoSize = true;
+            this.lblRegistros.Location = new System.Drawing.Point(6, 463);
+            this.lblRegistros.Name = "lblRegistros";
+            this.lblRegistros.Size = new System.Drawing.Size(0, 17);
+            this.lblRegistros.TabIndex = 25;
+            // 
             // chkMarcaTodos
             // 
             this.chkMarcaTodos.AutoSize = true;
-            this.chkMarcaTodos.Location = new System.Drawing.Point(9, 86);
+            this.chkMarcaTodos.Enabled = false;
+            this.chkMarcaTodos.Location = new System.Drawing.Point(9, 114);
             this.chkMarcaTodos.Name = "chkMarcaTodos";
             this.chkMarcaTodos.Size = new System.Drawing.Size(118, 21);
             this.chkMarcaTodos.TabIndex = 24;
@@ -80,10 +96,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtgResultadoPesquisa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgResultadoPesquisa.Location = new System.Drawing.Point(9, 113);
+            this.dtgResultadoPesquisa.Location = new System.Drawing.Point(9, 141);
             this.dtgResultadoPesquisa.Name = "dtgResultadoPesquisa";
             this.dtgResultadoPesquisa.RowTemplate.Height = 24;
-            this.dtgResultadoPesquisa.Size = new System.Drawing.Size(913, 364);
+            this.dtgResultadoPesquisa.Size = new System.Drawing.Size(913, 312);
             this.dtgResultadoPesquisa.TabIndex = 23;
             this.dtgResultadoPesquisa.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dtgResultadoPesquisa_MouseUp);
             // 
@@ -91,6 +107,9 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.lblcaminho);
+            this.groupBox2.Controls.Add(this.btnCaminho);
+            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.txtAnoCompetencia);
             this.groupBox2.Controls.Add(this.cmbMesCompetencia);
@@ -98,7 +117,7 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Location = new System.Drawing.Point(9, 10);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(913, 70);
+            this.groupBox2.Size = new System.Drawing.Size(913, 98);
             this.groupBox2.TabIndex = 22;
             this.groupBox2.TabStop = false;
             // 
@@ -187,6 +206,33 @@
             this.btnGerar.Text = "Gerar Planilhas";
             this.btnGerar.Click += new System.EventHandler(this.btnGerar_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(11, 58);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(127, 17);
+            this.label2.TabIndex = 25;
+            this.label2.Text = "Gerar Arquivos em";
+            // 
+            // btnCaminho
+            // 
+            this.btnCaminho.Location = new System.Drawing.Point(144, 55);
+            this.btnCaminho.Name = "btnCaminho";
+            this.btnCaminho.Size = new System.Drawing.Size(30, 23);
+            this.btnCaminho.TabIndex = 26;
+            this.btnCaminho.Text = "...";
+            this.btnCaminho.UseVisualStyleBackColor = true;
+            this.btnCaminho.Click += new System.EventHandler(this.btnCaminho_Click);
+            // 
+            // lblcaminho
+            // 
+            this.lblcaminho.AutoSize = true;
+            this.lblcaminho.Location = new System.Drawing.Point(180, 58);
+            this.lblcaminho.Name = "lblcaminho";
+            this.lblcaminho.Size = new System.Drawing.Size(0, 17);
+            this.lblcaminho.TabIndex = 27;
+            // 
             // frmGeraFolhasPonto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -223,5 +269,10 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton btnGerar;
         private System.Windows.Forms.CheckBox chkMarcaTodos;
+        private System.Windows.Forms.Label lblRegistros;
+        private System.Windows.Forms.Label lblcaminho;
+        private System.Windows.Forms.Button btnCaminho;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }

@@ -60,6 +60,37 @@ namespace iFolhaPonto.Models
                 throw ex;
             }
         }
+
+        public static DataTable GetFeriadosPorData(DateTime data)
+        {
+            string dia;
+            string mes;
+            string ano;
+            SQLiteDataAdapter da = null;
+            DataTable dt = new DataTable();
+            try
+            {
+                using (var cmd = DalHelper.DbConnection().CreateCommand())
+                {
+                    //cmd.CommandText = "SELECT * FROM Feriados Where data=" + data;
+                    //cmd.CommandText = @"Select * From  FluxoCaixaDinheiro Where data Like(@data)";
+                    //sql correto do sqlite para pesquisa por data
+                    //select * from feriados where strftime('%Y-%m-%d', Data) =  date('2019-05-01')
+                    ano = data.Year.ToString();
+                    mes = data.Month < 10 ? "0" + data.Month: data.Month.ToString();
+                    dia = data.Day <10 ? "0" + data.Day : data.Day.ToString();
+                    cmd.CommandText = @"select * from feriados where strftime('%Y-%m-%d', data) =  date('"+ ano + "-" + mes + "-" + dia + "')";
+                    da = new SQLiteDataAdapter(cmd.CommandText, DalHelper.DbConnection());
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static void Add(Feriados feriados)
         {
             int result = -1;

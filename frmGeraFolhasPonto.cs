@@ -104,7 +104,6 @@ namespace iFolhaPonto
                             xlWorkSheet.Cells[linhaInicio + j, 5].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
                             xlWorkSheet.Cells[linhaInicio + j, 6].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
                             xlWorkSheet.Cells[linhaInicio + j, 7].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
-
                         }
                         else if (retornaDiaDaSemana(dtInicio.AddDays(j)) == "DOM")
                         {
@@ -115,10 +114,22 @@ namespace iFolhaPonto
                             xlWorkSheet.Cells[linhaInicio + j, 6].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
                             xlWorkSheet.Cells[linhaInicio + j, 7].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
                         }
+                        else
+                        {
+                            DateTime data = dtInicio.AddDays(j);
+                            System.Data.DataTable dt = Feriados.GetFeriadosPorData(data);
+
+                            if(dt.Rows.Count>0)
+                            {
+                                //xlWorkSheet.Cells[linhaInicio + j, 3] = dt.Rows[0].ItemArray[1].ToString(); nome do feriado
+                                xlWorkSheet.Cells[linhaInicio + j, 3] = "FERIADO";
+                                xlWorkSheet.Range[xlWorkSheet.Cells[linhaInicio + j, 3], xlWorkSheet.Cells[linhaInicio + j, 7]].Merge();
+                                xlWorkSheet.Range[xlWorkSheet.Cells[linhaInicio + j, 3], xlWorkSheet.Cells[linhaInicio + j, 7]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
+                                xlWorkSheet.Range[xlWorkSheet.Cells[linhaInicio + j, 3], xlWorkSheet.Cells[linhaInicio + j, 7]].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                            }
+                        }
 
                         xlWorkSheet.Cells[linhaInicio + j, 2] = " "+dtInicio.AddDays(j).ToShortDateString();
-
-
                     }
 
                     Excel.Range tRange2 = xlWorkSheet.Range[xlWorkSheet.Cells[linhaInicio, 1], xlWorkSheet.Cells[(linhaInicio + DiasDoMes)-1, 7]];
@@ -151,7 +162,8 @@ namespace iFolhaPonto
                     //tRange.Borders.Weight = Excel.XlBorderWeight.xlThin;
 
                     //o arquivo foi salvo na pasta Meus Documentos.
-                    string caminho = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                    //string caminho = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                    string caminho = lblcaminho.Text;
                     string nomeArquivoExcel = dtgResultadoPesquisa[3, i].Value + "-" + dtgResultadoPesquisa[2, i].Value + ".xls";
                     //string nomeArquivoPDF = dtgResultadoPesquisa[3, i].Value + "-" + dtgResultadoPesquisa[2, i].Value + ".pdf";
 
@@ -164,7 +176,7 @@ namespace iFolhaPonto
                 }
             }
 
-            System.Diagnostics.Process.Start("taskkill", "/f /im EXCEL.exe");
+            System.Diagnostics.Process.Start("taskkill", "/f /im EXCEL.exe");            
 
             MessageBox.Show("Arquivos Gerados.");
         }
@@ -246,14 +258,19 @@ namespace iFolhaPonto
                     dtgResultadoPesquisa.Columns[4].Width = 200;
                     dtgResultadoPesquisa.Columns[5].Visible = false;
                     dtgResultadoPesquisa.Columns[6].Visible = false;
-
+                   
                     if (dtgResultadoPesquisa.Rows.Count > 0)
                     {
-                        btnGerar.Enabled = true;
+                        if (lblcaminho.Text != "")
+                            btnGerar.Enabled = true;
+                        lblRegistros.Text = dtgResultadoPesquisa.Rows.Count + "Registros encontrados.";
+                        chkMarcaTodos.Enabled = true;
                     }
                     else
                     {
                         btnGerar.Enabled = false;
+                        lblRegistros.Text = "0 Registros encontrados.";
+                        chkMarcaTodos.Enabled = false;
                     }
                 }
                 catch (Exception ex)
@@ -287,6 +304,7 @@ namespace iFolhaPonto
         private void dtgResultadoPesquisa_MouseUp(object sender, MouseEventArgs e)
         {
             dtgResultadoPesquisa.CurrentCell = dtgResultadoPesquisa[0, dtgResultadoPesquisa.CurrentCell.RowIndex];
+            lblRegistros.Focus();
         }
 
         private void chkMarcaTodos_CheckedChanged(object sender, EventArgs e)
@@ -296,7 +314,7 @@ namespace iFolhaPonto
                 for (int i = 0; i < dtgResultadoPesquisa.Rows.Count; i++)
                 {
                     dtgResultadoPesquisa.Rows[i].Cells[0].Value = 1;
-                }
+                }                
             }
             else
             {
@@ -305,7 +323,7 @@ namespace iFolhaPonto
                     dtgResultadoPesquisa.Rows[i].Cells[0].Value = 0;
                 }
             }
-
+            lblRegistros.Focus();
         }
 
         private string retornaDiaDaSemana(DateTime dt)
@@ -336,6 +354,15 @@ namespace iFolhaPonto
                     break;                
             }
             return retorno;
+        }
+
+        private void btnCaminho_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                lblcaminho.Text = folderBrowserDialog1.SelectedPath;
+                btnGerar.Enabled = true;
+            }
         }
     }
 }
