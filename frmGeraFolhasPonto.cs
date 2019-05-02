@@ -26,7 +26,7 @@ namespace iFolhaPonto
             btnGerar.Enabled = false;
         }
 
-        private void GeraDadosExcel()
+        private void GeraDadosExcelDe01a30()
         {
             for (int i = 0; i < dtgResultadoPesquisa.Rows.Count; i++)
             {
@@ -181,9 +181,171 @@ namespace iFolhaPonto
             MessageBox.Show("Arquivos Gerados.");
         }
 
+        private void GeraDadosExcelDe21a20()
+        {
+            for (int i = 0; i < dtgResultadoPesquisa.Rows.Count; i++)
+            {
+                if (dtgResultadoPesquisa[0, i].Value.ToString() == "1")
+                {
+
+                    // Inicia o componente Excel
+                    Excel.Application xlApp;
+                    Excel.Workbook xlWorkBook;
+                    Excel.Worksheet xlWorkSheet;
+                    object misValue = System.Reflection.Missing.Value;
+                    //Cria uma planilha temporária na memória do computador
+                    xlApp = new Excel.Application();
+                    xlWorkBook = xlApp.Workbooks.Add(misValue);
+                    xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+                    #region CABEÇALHO
+                    //incluindo dados
+                    xlWorkSheet.Cells[1, 1] = "COD: " + dtgResultadoPesquisa[1, i].Value;
+                    xlWorkSheet.Cells[2, 1] = "COLABORADOR: " + dtgResultadoPesquisa[2, i].Value;
+                    xlWorkSheet.Cells[3, 1] = "CC: " + dtgResultadoPesquisa[3, i].Value;
+                    xlWorkSheet.Cells[4, 1] = "DEPTO: " + dtgResultadoPesquisa[4, i].Value;
+                    xlWorkSheet.Cells[5, 1] = "FUNÇÃO: " + dtgResultadoPesquisa[6, i].Value;
+                    xlWorkSheet.Cells[6, 1] = "CPF: " + dtgResultadoPesquisa[5, i].Value;
+
+                    xlWorkSheet.Cells[8, 1] = "Dias";
+                    xlWorkSheet.Range[xlWorkSheet.Cells[8, 1], xlWorkSheet.Cells[9, 2]].Merge();
+                    xlWorkSheet.Range[xlWorkSheet.Cells[8, 1], xlWorkSheet.Cells[9, 2]].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    xlWorkSheet.Range[xlWorkSheet.Cells[8, 1], xlWorkSheet.Cells[9, 2]].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+
+                    xlWorkSheet.Cells[8, 3] = "Entrada";
+                    xlWorkSheet.Range[xlWorkSheet.Cells[8, 3], xlWorkSheet.Cells[9, 3]].Merge();
+                    xlWorkSheet.Range[xlWorkSheet.Cells[8, 3], xlWorkSheet.Cells[9, 3]].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    xlWorkSheet.Range[xlWorkSheet.Cells[8, 3], xlWorkSheet.Cells[9, 3]].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+
+                    xlWorkSheet.Cells[8, 4] = "Almoço";
+                    xlWorkSheet.Range[xlWorkSheet.Cells[8, 4], xlWorkSheet.Cells[8, 5]].Merge();
+                    xlWorkSheet.Range[xlWorkSheet.Cells[8, 4], xlWorkSheet.Cells[8, 5]].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+
+                    xlWorkSheet.Cells[9, 4] = "Saída";
+                    xlWorkSheet.Cells[9, 4].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    xlWorkSheet.Cells[9, 5] = "Retorno";
+                    xlWorkSheet.Cells[9, 5].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+
+                    xlWorkSheet.Cells[8, 6] = "Saída";
+                    xlWorkSheet.Range[xlWorkSheet.Cells[8, 6], xlWorkSheet.Cells[9, 6]].Merge();
+                    xlWorkSheet.Range[xlWorkSheet.Cells[8, 6], xlWorkSheet.Cells[9, 6]].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    xlWorkSheet.Range[xlWorkSheet.Cells[8, 6], xlWorkSheet.Cells[9, 6]].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+
+                    xlWorkSheet.Cells[8, 7] = "Observações";
+                    xlWorkSheet.Range[xlWorkSheet.Cells[8, 7], xlWorkSheet.Cells[9, 7]].Merge();
+                    xlWorkSheet.Range[xlWorkSheet.Cells[8, 7], xlWorkSheet.Cells[9, 7]].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    xlWorkSheet.Range[xlWorkSheet.Cells[8, 7], xlWorkSheet.Cells[9, 7]].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+
+
+                    xlWorkSheet.Range[xlWorkSheet.Cells[8, 1], xlWorkSheet.Cells[9, 7]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
+
+                    //Seleciona Range para por bordas
+                    Excel.Range tRange = xlWorkSheet.Range[xlWorkSheet.Cells[8, 1], xlWorkSheet.Cells[9, 7]];
+                    tRange.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
+                    tRange.Borders.Weight = Excel.XlBorderWeight.xlThin;
+
+                    #endregion CABEÇALHO
+
+                    //int DiasDoMes = DateTime.DaysInMonth(Convert.ToInt16(txtAnoCompetencia.Text), Convert.ToInt16(cmbMesCompetencia.SelectedValue));                    
+                    //DateTime dtInicio = Convert.ToDateTime("01/" + Convert.ToInt16(cmbMesCompetencia.SelectedValue) + "/" + Convert.ToInt16(txtAnoCompetencia.Text));
+                    DateTime dtInicio = Convert.ToDateTime("21/" + (Convert.ToInt16(cmbMesCompetencia.SelectedValue) - 1) + "/" + Convert.ToInt16(txtAnoCompetencia.Text));
+                    DateTime dtFim = Convert.ToDateTime("20/" + Convert.ToInt16(cmbMesCompetencia.SelectedValue)  + "/" + Convert.ToInt16(txtAnoCompetencia.Text));
+                    int DiasDoMes = (dtFim - dtInicio).Days + 1;
+                    int linhaInicio = 10;
+                    //for (int j = 0; j < DiasDoMes; j++)
+                    for (int j = 0; j < DiasDoMes; j++)
+                    {
+                        //dtInicio.Date.ToShortDateString()
+                        //"01/04/2019"
+                        //? dtInicio.DayOfWeek
+                        //Monday
+                        xlWorkSheet.Cells[linhaInicio + j, 1] = retornaDiaDaSemana(dtInicio.AddDays(j));
+                        if (retornaDiaDaSemana(dtInicio.AddDays(j)) == "SAB")
+                        {
+                            xlWorkSheet.Cells[linhaInicio + j, 1].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
+                            xlWorkSheet.Cells[linhaInicio + j, 5].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
+                            xlWorkSheet.Cells[linhaInicio + j, 6].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
+                            xlWorkSheet.Cells[linhaInicio + j, 7].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
+                        }
+                        else if (retornaDiaDaSemana(dtInicio.AddDays(j)) == "DOM")
+                        {
+                            xlWorkSheet.Cells[linhaInicio + j, 1].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
+                            xlWorkSheet.Cells[linhaInicio + j, 3].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
+                            xlWorkSheet.Cells[linhaInicio + j, 4].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
+                            xlWorkSheet.Cells[linhaInicio + j, 5].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
+                            xlWorkSheet.Cells[linhaInicio + j, 6].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
+                            xlWorkSheet.Cells[linhaInicio + j, 7].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
+                        }
+                        else
+                        {
+                            DateTime data = dtInicio.AddDays(j);
+                            System.Data.DataTable dt = Feriados.GetFeriadosPorData(data);
+
+                            if (dt.Rows.Count > 0)
+                            {
+                                //xlWorkSheet.Cells[linhaInicio + j, 3] = dt.Rows[0].ItemArray[1].ToString(); nome do feriado
+                                xlWorkSheet.Cells[linhaInicio + j, 3] = "FERIADO";
+                                xlWorkSheet.Range[xlWorkSheet.Cells[linhaInicio + j, 3], xlWorkSheet.Cells[linhaInicio + j, 7]].Merge();
+                                xlWorkSheet.Range[xlWorkSheet.Cells[linhaInicio + j, 3], xlWorkSheet.Cells[linhaInicio + j, 7]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Cyan);
+                                xlWorkSheet.Range[xlWorkSheet.Cells[linhaInicio + j, 3], xlWorkSheet.Cells[linhaInicio + j, 7]].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                            }
+                        }
+
+                        xlWorkSheet.Cells[linhaInicio + j, 2] = " " + dtInicio.AddDays(j).ToShortDateString();
+                    }
+
+                    Excel.Range tRange2 = xlWorkSheet.Range[xlWorkSheet.Cells[linhaInicio, 1], xlWorkSheet.Cells[(linhaInicio + DiasDoMes) - 1, 7]];
+                    tRange2.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
+                    tRange2.Borders.Weight = Excel.XlBorderWeight.xlThin;
+
+                    //tamanho das colunas
+                    xlWorkSheet.Columns[1].ColumnWidth = 4.9;
+                    xlWorkSheet.Columns[2].ColumnWidth = 10.2;
+                    xlWorkSheet.Columns[3].ColumnWidth = 8.5;
+                    xlWorkSheet.Columns[4].ColumnWidth = 8.5;
+                    xlWorkSheet.Columns[5].ColumnWidth = 8.5;
+                    xlWorkSheet.Columns[6].ColumnWidth = 8.5;
+                    xlWorkSheet.Columns[7].ColumnWidth = 32;
+
+                    //pinta a celula
+                    //xlWorkSheet.Cells[2, 1].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Gray);
+
+                    //Mesclar celulas ok
+                    //xlWorkSheet.Range[xlWorkSheet.Cells[1, 2], xlWorkSheet.Cells[1, 3]].Merge();
+
+                    //Seleciona Range para por bordas
+                    //Excel.Range tRange = xlWorkSheet.Range[xlWorkSheet.Cells[2, 1], xlWorkSheet.Cells[2, 4]];
+                    //tRange.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
+                    //tRange.Borders.Weight = Excel.XlBorderWeight.xlThin;
+
+                    //borda em tudo
+                    //Excel.Range tRange = xlWorkSheet.UsedRange;
+                    //tRange.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
+                    //tRange.Borders.Weight = Excel.XlBorderWeight.xlThin;
+
+                    //o arquivo foi salvo na pasta Meus Documentos.
+                    //string caminho = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                    string caminho = lblcaminho.Text;
+                    string nomeArquivoExcel = dtgResultadoPesquisa[3, i].Value + "-" + dtgResultadoPesquisa[2, i].Value + ".xls";
+                    //string nomeArquivoPDF = dtgResultadoPesquisa[3, i].Value + "-" + dtgResultadoPesquisa[2, i].Value + ".pdf";
+
+                    //Salva o arquivo de acordo com a documentação do Excel.
+                    xlWorkBook.SaveAs(caminho + @"\" + nomeArquivoExcel, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue,
+                    Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+
+                    xlWorkBook.Close(true, misValue, misValue);
+                    xlApp.Quit();
+                }
+            }
+
+            System.Diagnostics.Process.Start("taskkill", "/f /im EXCEL.exe");
+
+            MessageBox.Show("Arquivos Gerados.");
+        }
+
         private void btnGerar_Click(object sender, EventArgs e)
         {
-            GeraDadosExcel();
+            GeraDadosExcelDe21a20();
         }
 
         private void populaComboCompetencia()

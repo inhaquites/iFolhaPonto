@@ -20,7 +20,7 @@ namespace iFolhaPonto
 
         public static SQLiteConnection DbConnection()
         {
-            sqliteConnection = new SQLiteConnection("Data Source=c:\\iFolhaPonto\\iFolhaPonto.drigo; Version=3;");
+            sqliteConnection = new SQLiteConnection("Data Source=c:\\iFolhaPonto\\iFolhaPonto.sqlite; Version=3;");
             sqliteConnection.Open();
             return sqliteConnection;
         }
@@ -31,7 +31,7 @@ namespace iFolhaPonto
                 //nome do diretorio onde sera criado o arquivo
                 string folder = @"c:\iFolhaPonto";
                 //arquivo banco de dados
-                string banco = @"c:\iFolhaPonto\iFolhaPonto.drigo";
+                string banco = @"c:\iFolhaPonto\iFolhaPonto.sqlite";
 
                 if (!Directory.Exists(folder))
                 {
@@ -41,7 +41,7 @@ namespace iFolhaPonto
 
                 if (!File.Exists(banco))
                 {
-                    SQLiteConnection.CreateFile(@"c:\iFolhaPonto\iFolhaPonto.drigo");
+                    SQLiteConnection.CreateFile(@"c:\iFolhaPonto\iFolhaPonto.sqlite");
                 }
 
                 
