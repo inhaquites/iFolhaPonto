@@ -183,6 +183,7 @@ namespace iFolhaPonto
 
         private void GeraDadosExcelDe21a20()
         {
+            int ultimaLinhaGerada = 0;
             for (int i = 0; i < dtgResultadoPesquisa.Rows.Count; i++)
             {
                 if (dtgResultadoPesquisa[0, i].Value.ToString() == "1")
@@ -252,6 +253,7 @@ namespace iFolhaPonto
                     DateTime dtFim = Convert.ToDateTime("20/" + Convert.ToInt16(cmbMesCompetencia.SelectedValue)  + "/" + Convert.ToInt16(txtAnoCompetencia.Text));
                     int DiasDoMes = (dtFim - dtInicio).Days + 1;
                     int linhaInicio = 10;
+                    
                     //for (int j = 0; j < DiasDoMes; j++)
                     for (int j = 0; j < DiasDoMes; j++)
                     {
@@ -292,7 +294,16 @@ namespace iFolhaPonto
                         }
 
                         xlWorkSheet.Cells[linhaInicio + j, 2] = " " + dtInicio.AddDays(j).ToShortDateString();
+                        ultimaLinhaGerada = linhaInicio + j;
                     }
+
+                    xlWorkSheet.Cells[ultimaLinhaGerada+3, 1] = "Declaro que as informações acima são verídicas. ASSINATURA DO COLABORADOR:";
+                    xlWorkSheet.Range[xlWorkSheet.Cells[ultimaLinhaGerada + 3, 1], xlWorkSheet.Cells[ultimaLinhaGerada + 3, 7]].Merge();
+                    xlWorkSheet.Range[xlWorkSheet.Cells[ultimaLinhaGerada + 3, 1], xlWorkSheet.Cells[ultimaLinhaGerada + 3, 7]].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+
+                    xlWorkSheet.Cells[ultimaLinhaGerada + 5, 1] = "EU DIRETOR(A) CONFIRMO AS INFORMAÇÕES PRESTADAS ACIMA.";
+                    xlWorkSheet.Range[xlWorkSheet.Cells[ultimaLinhaGerada + 5, 1], xlWorkSheet.Cells[ultimaLinhaGerada + 5, 7]].Merge();
+                    xlWorkSheet.Range[xlWorkSheet.Cells[ultimaLinhaGerada + 5, 1], xlWorkSheet.Cells[ultimaLinhaGerada + 5, 7]].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
 
                     Excel.Range tRange2 = xlWorkSheet.Range[xlWorkSheet.Cells[linhaInicio, 1], xlWorkSheet.Cells[(linhaInicio + DiasDoMes) - 1, 7]];
                     tRange2.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
